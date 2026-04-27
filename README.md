@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# カート機能 - フロントエンド
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite で構築したECサイトのフロントエンドです。
 
-Currently, two official plugins are available:
+## デモ
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+https://cart-front.onrender.com
 
-## React Compiler
+## 技術スタック
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- TypeScript
+- Vite
+- react-router-dom
+- Render（デプロイ）
 
-## Expanding the ESLint configuration
+## 機能
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ログイン・新規登録
+- 商品一覧・詳細表示
+- カートへの商品追加・削除
+- 注文・Stripe決済
+- 注文完了画面
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 画面構成
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| パス | 画面 | 認証 |
+|---|---|---|
+| / | 商品一覧 | 不要 |
+| /products/:id | 商品詳細 | 不要 |
+| /login | ログイン | 不要 |
+| /register | 新規登録 | 不要 |
+| /cart | カート・注文・決済 | 必要 |
+| /orders/complete | 注文完了 | 必要 |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ローカル起動
+
+```bash
+# パッケージインストール
+npm install
+
+# 環境変数設定
+cp .env.example .env
+
+# 起動
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 環境変数
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| 変数名 | 説明 |
+|---|---|
+| VITE_API_BASE_URL | バックエンドのURL |
